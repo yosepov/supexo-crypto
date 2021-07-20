@@ -1,0 +1,30 @@
+{
+  "name": "supexo-api",
+  "version": "1.0.0",
+  "description": "Supexo.com API client library for NodeJS",
+  "keywords": [
+    "supexo",
+    "api",
+    "btc",
+    "bitcoin",
+    "nodejs"
+  ],
+  "author": "Erez Yosepov",
+  "contributors": [],
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "fs": "0.0.1-security",
+    "got": "^11.8.2",
+    "qs": "^6.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yosepov/supexo-crypto.git"
+  },
+  "main": "Supexo.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "readmeFilename": "README.md"
+}
