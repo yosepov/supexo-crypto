@@ -42,7 +42,7 @@ const params = {
 }
 const client = new SupexoClient(key, secret);
 (async () => {
-    // Display user's balance
+    //  Display btc Assets
     response = await client.api('Assets',params)
     console.log(response.result);
 })();
