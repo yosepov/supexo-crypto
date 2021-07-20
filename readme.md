@@ -1,8 +1,7 @@
+### Supexo js API
 
-Supexo API
 
-/**
-    * api method makes a public or private API request.
+ # api method makes a public or private API request.
     * @param  {String}   method   The API method (public or private)
     * @param  {Object}   params   Arguments to pass to the api call
     * @param  {Function} callback A callback function to be executed when the request is complete
@@ -10,8 +9,7 @@ Supexo API
     * @return {Object}            The request object
     */
 
-/**
- * SupexoClient api methodsNames
+# SupexoClient api methodsNames
  * public  : [ 'Time', 'Assets', 'AssetPairs', 'Ticker', 'Depth', 'Trades', 'Spread', 'OHLC' ],
  * private : [   'Ledgers', 'DepositAddresses', 'DepositStatus', "DepositMethods", "WalletTransfer" ],
 
@@ -20,14 +18,12 @@ Supexo API
 
 
 
-/**
- * SupexoClient connects to the Kraken.com API
+# SupexoClient connects to the Kraken.com API
  * @param {String}        key               API Key
  * @param {String}        secret            API Secret
  */
  
-/**
-* publicMethod / privateMethod methods makes a public API request.
+# publicMethod / privateMethod methods makes a public API request.
 * @param  {String}   method   The API method (public or private)
 * @param  {Object}   params   Arguments to pass to the api call
 * @param  {Function} callback A callback function to be executed when the request is complete
@@ -35,18 +31,18 @@ Supexo API
 */
 
 
-Example:
-# const SupexoClient = require('./Supexo');
-# const key          = '...'; // API Key
-# const secret       = '...'; // API Private Key
-# const params = {
-#    nonce: new Date() * 1000,    
-#   asset: "XBT",
-#  method: "Bitcoin"
-# }
-# const client = new SupexoClient(key, secret);
-# (async () => {
-#     // Display user's balance
-#     response = await client.api('Assets',params)
-#     console.log(response.result);
-# })();
+# Example:
+const SupexoClient = require('supexo-js-api');
+const key          = '...'; // API Key
+const secret       = '...'; // API Private Key
+const params = {
+   nonce: new Date() * 1000,    
+  asset: "XBT",
+ method: "Bitcoin"
+}
+const client = new SupexoClient(key, secret);
+(async () => {
+    // Display user's balance
+    response = await client.api('Assets',params)
+    console.log(response.result);
+})();
