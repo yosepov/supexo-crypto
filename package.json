@@ -1,5 +1,5 @@
 {
-  "name": "supexo-api",
+  "name": "supexo-js-api",
   "version": "1.0.0",
   "description": "Supexo.com API client library for NodeJS",
   "keywords": [
