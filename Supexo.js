@@ -3,10 +3,9 @@ const crypto = require('crypto');
 const qs     = require('qs');
 const fs = require('fs');
 
-// Public/Private method names
-const methods = {
+const methodsNames = {
 	public  : [ 'Time', 'Assets', 'AssetPairs', 'Ticker', 'Depth', 'Trades', 'Spread', 'OHLC' ],
-	private : [   'Ledgers', 'DepositAddresses', 'DepositStatus', ],
+	private : [   'Ledgers', 'DepositAddresses', 'DepositStatus', "DepositMethods", "WalletTransfer" ],
 };
 
 // Create a signature for a request
@@ -38,14 +37,12 @@ const rawRequest = async (url, headers, data, timeout) => {
 
 	if(response.error && response.error.length) {
 		const error = response.error
-			.filter((e) => e.startsWith('E'))
-			.map((e) => e.substr(1));
 
 		if(!error.length) {
 			throw new Error("Supexo API returned an unknown error");
 		}
 
-		throw new Error(error.join(','));
+		throw new Error(error);
 	}
 
 	return response;
@@ -72,26 +69,19 @@ class SupexoClient {
 		this.config = Object.assign({ key, secret }, defaults, options);
 	}
 
-	/**
-	 * This method makes a public or private API request.
-	 * @param  {String}   method   The API method (public or private)
-	 * @param  {Object}   params   Arguments to pass to the api call
-	 * @param  {Function} callback A callback function to be executed when the request is complete
-	 * @return {Object}            The request object
-	 */
-	api(method, params, callback,) {
+	api(method, params, callback, writeFile) {
 		// Default params to empty object
 		if(typeof params === 'function') {
 			callback = params;
 			params   = {};
 		}
 
-		if(methods.public.includes(method)) {
+		if(methodsNames.public.includes(method)) {
 			return this.publicMethod(method, params, callback);
 		}
-		else if(methods.private.includes(method)) {
+		else if(methodsNames.private.includes(method)) {
 			const response =  this.privateMethod(method, params, callback);
-			if(method === 'DepositStatus' && response.result){
+			if(method === 'DepositStatus' && writeFile){
 				fs.writeFile(`transaction.json`, response.result, (err) => {
 					if(err){
 						console.log(res.message + " HOLALALA")
@@ -107,13 +97,6 @@ class SupexoClient {
 		}
 	}
 
-	/**
-	 * This method makes a public API request.
-	 * @param  {String}   method   The API method (public or private)
-	 * @param  {Object}   params   Arguments to pass to the api call
-	 * @param  {Function} callback A callback function to be executed when the request is complete
-	 * @return {Object}            The request object
-	 */
 	publicMethod(method, params, callback) {
 		params = params || {};
 
